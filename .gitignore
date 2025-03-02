@@ -6,6 +6,41 @@ __pycache__/
 # C extensions
 *.so
 
+# Игнорировать папки и файлы, создаваемые Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Игнорировать папки и файлы, создаваемые IDE
+.vscode/
+.idea/
+
+# Игнорировать виртуальные окружения
+venv/
+env/
+.env/
+
+# Игнорировать логи и временные файлы
+*.log
+*.tmp
+*.swp
+
+# Игнорировать конфиденциальные данные
+secrets.py
+config.ini
+*.env
+
+# Игнорировать скомпилированные файлы и бинарники
+*.so
+*.pyc
+*.pyd
+*.exe
+
+# Игнорировать папки с зависимостями
+dist/
+build/
+*.egg-info/
+
 # Distribution / packaging
 .Python
 build/
