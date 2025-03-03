@@ -97,28 +97,34 @@ class QuadDisplay:
         :param duration: Время отображения числа в секундах.
         """
         start_time = utime.time()  # Запоминаем время начала
-        
+
         # Проверяем, есть ли минус в строке
         is_negative = num_str.startswith('-')
         if is_negative:
             num_str = num_str[1:]  # Убираем минус из строки
-        
+
         # Проверяем, есть ли точка в строке
         is_decimal = '.' in num_str
-        
+
+        # Если zeros=True, добавляем ведущие нули
+        if zeros and not is_decimal:
+            num_length = len(num_str)
+            if num_length < 4:
+                num_str = '0' * (4 - num_length) + num_str  # Добавляем ведущие нули
+
         # Дополняем строку до 4 символов (если нужно)
         if len(num_str) < 4:
             num_str = num_str + ' ' * (4 - len(num_str))  # Ручное дополнение пробелами
-        
+
         while utime.time() - start_time < duration:  # Отображаем строку в течение duration секунд
             i = 0
             position = 0  # Позиция разряда
-            
+
             # Отображаем минус, если число отрицательное
             if is_negative:
                 self.display_digit(47, position)  # Минус
                 position += 1
-            
+
             while i < len(num_str) and position < 4:
                 char = num_str[i]
                 if char == '.':
@@ -137,11 +143,7 @@ class QuadDisplay:
                         if is_decimal and i > num_str.find('.'):
                             self.display_digit(digit, position)
                         else:
-                            # Если zeros=False, пропускаем ведущие нули
-                            if not zeros and digit == 0 and i < len(num_str) - 1 and not is_decimal:
-                                self.display_digit(43, position)  # Пустая клетка
-                            else:
-                                self.display_digit(digit, position)
+                            self.display_digit(digit, position)
                     elif char.isalpha():
                         # Преобразуем букву в индекс в списке паттернов
                         index = ord(char.upper()) - ord('A') + 21
@@ -149,13 +151,13 @@ class QuadDisplay:
                     else:
                         # Обработка специальных символов
                         if char == ' ':
-                            self.display_digit(43, position)  # Пробел
+                            self.display_digit(10, position)  # Пробел
                         elif char == '-':
                             self.display_digit(47, position)  # Минус
                         elif char == '.':
                             self.display_digit(48, position)  # Точка
                         elif char == '*':
-                            self.display_digit(49, position)  # Звезда
+                            self.display_digit(40, position)  # Звезда
                         elif char == '_':
                             self.display_digit(50, position)  # Подчеркивание
                     i += 1
