@@ -1,14 +1,24 @@
 from quaddisplay import QuadDisplay
-# Пример использования
-segment_pins = [15, 14, 13, 12, 11, 10, 9, 8]  # Пины для сегментов
-digit_pins = [16, 17, 18, 19]  # Пины для разрядов
+import utime
 
+# Пины для сегментов (a, b, c, d, e, f, g, dp)
+segment_pins = [15, 14, 13, 12, 11, 10, 9, 8]
+# Пины для разрядов (Digit 1, Digit 2, Digit 3, Digit 4)
+digit_pins = [16, 17, 18, 19]
+
+# Создаем объект дисплея
 display = QuadDisplay(segment_pins, digit_pins)
 
-# бесконечный цикл для отображения чисел
+# Бесконечный цикл для отображения чисел и текста
 while True:
-    # Отображаем число 256 с ведущими нулями в течение 5 секунд
-    display.display_number(256, leading_zeros=True, duration=5)
+    display.number("123", zeros=True, duration=2)  # Отображаем 123 без ведущих нулей
+    display.number("023", zeros=False, duration=2) # Отображаем 0123 как 123
+    display.number("12.34", duration=2)            # Отображаем 12.34
+    display.number("-56.78", duration=2)           # Отображаем -56.78
     
-    # Отображаем число 257 без ведущих нулей в течение 5 секунд
-    display.display_number(257, leading_zeros=False, duration=5)
+    # Анимации
+    display.scroll_text("123456789", delay=0.2)        # Бегущая строка
+    display.blink_text("TEST", times=3, delay=0.5) # Мигание текста
+    
+    # Отображение текста
+    display.number("ABCD", duration=3)             # Отображаем текст
