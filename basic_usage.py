@@ -22,3 +22,5 @@ while True:
     
     # Отображение текста
     display.number("ABCD", duration=3)             # Отображаем текст
+    display.clear()
+    utime.sleep(2.5)
