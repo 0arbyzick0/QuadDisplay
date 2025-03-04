@@ -82,6 +82,6 @@ while True:
 - delay = задержка между миганиями // delay between blinks
 
 # QuadDisplay.clear()
-- очищает все разряды и сегменты
+- очищает все разряды и сегменты // clears all digits and segments
 
-надеюсь вам будет полезно!
+надеюсь вам будет полезно! // hope this helps!
