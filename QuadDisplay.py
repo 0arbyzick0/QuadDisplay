@@ -1,7 +1,7 @@
 from machine import Pin
 import utime
 
-class sillyDisplay:
+class QuadDisplay:
     def __init__(self, segment_pins, digit_pins):
         """
         Инициализация дисплея.
